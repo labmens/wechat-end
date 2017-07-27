@@ -1,0 +1,26 @@
+{
+  "name": "lab-im",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "npm run build-ts && npm run watch",
+    "watch": "npm run watch-ts && npm run serve",
+    "watch-ts": "tsc -w",
+    "serve": "node dist/serve.js",
+    "build-ts": "tsc"
+  },
+  "dependencies": {
+    "@types/express": "^4.0.36",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "mongoose": "^4.11.3",
+    "morgan": "~1.8.1",
+    "path": "^0.12.7",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {}
+}
