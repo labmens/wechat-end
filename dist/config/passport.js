@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const passport = require("passport");
-const passport_local_1 = require("passport-local");
+const passportLocal = require("passport-local");
 const models_1 = require("../models");
+const LocalStrategy = passportLocal.Strategy;
 passport.serializeUser((user, done) => {
     done(undefined, user.id);
 });
@@ -11,7 +12,7 @@ passport.deserializeUser((id, done) => {
         done(err, user);
     });
 });
-passport.use(new passport_local_1.LocalStrategy(function (username, password, done) {
+passport.use(new LocalStrategy(function (username, password, done) {
     models_1.User.findOne({
         username
     }, (err, user) => {

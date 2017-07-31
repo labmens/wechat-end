@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as session from 'express-session';
+import * as expressValidator from 'express-validator';
 
 import * as passport from 'passport';
 import * as path from 'path';
@@ -9,16 +10,15 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 
 import './models';
+import './config/passport';
 import { router as users } from './routes/users'
 
 const app = express();
 
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
+app.use(expressValidator());
 app.use(cookieParser());
 
 app.use(session({
@@ -43,13 +43,8 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-  console.log(123)
-  // res.locals.message = err.message;
-  // res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
-  // res.render('error');
   res.json({
     message: err.message,
     error: err

@@ -5,7 +5,8 @@ const bcrypt = require("bcrypt-nodejs");
 // export type UserModel = mongoose.Document & {
 // }
 const userSchema = new mongoose.Schema({
-    email: {
+    email: String,
+    username: {
         type: String,
         unique: true
     },
@@ -38,7 +39,7 @@ userSchema.pre('save', function save(next) {
         if (err) {
             return next(err);
         }
-        bcrypt.hsah(user.password, salt, undefined, (err, hash) => {
+        bcrypt.hash(user.password, salt, undefined, (err, hash) => {
             if (err) {
                 return next(err);
             }

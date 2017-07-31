@@ -1,6 +1,8 @@
 import * as passport from 'passport';
-import { LocalStrategy } from 'passport-local';
+import * as passportLocal from 'passport-local';
 import { User } from '../models';
+
+const LocalStrategy = passportLocal.Strategy;
 
 passport.serializeUser<any, any>((user, done) => {
   done(undefined, user.id);

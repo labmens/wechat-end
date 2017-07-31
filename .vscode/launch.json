@@ -4,14 +4,26 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
     {
+      "cwd": "${workspaceRoot}",
+      "env": {
+          "NODE_ENV": "development"
+      },
       "type": "node",
+      "sourceMaps": true,
+      "runtimeExecutable": null,
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceRoot}/bin/www",
+      "program": "${workspaceRoot}/src/server.ts",
       "outFiles": [
-        "${workspaceRoot}/out/**/*.js"
+        "${workspaceRoot}/dist/**/*.js"
       ]
-    }
+    }, {
+        "name": "Attach",
+        "type": "node",
+        "request": "attach",
+        "port": 5858
+      }
   ]
 }
