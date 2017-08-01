@@ -1,13 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-// import * as User from '../../models/User';
 import { default as User } from '../../models/User';
-
-export function login(req, res, next) {
-  res.Json({
-    message: '登入成功'
-  })
-}
 
 export function signUp(req, res, next) {
   req.assert('password', 'Password must be at least 4 characters long').len({min: 4});
@@ -46,8 +39,12 @@ export function signUp(req, res, next) {
       })
     })
   })
-  // const errors = req.validationErrors();
+}
 
-
-
+export function logout(req, res) {
+  console.log(req.logout);
+  req.logout();
+  res.json({
+    message: '成功退出'
+  })
 }

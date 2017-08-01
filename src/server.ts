@@ -23,8 +23,10 @@ app.use(cookieParser());
 
 app.use(session({
   secret: 'mmmmpc',
+  resave: true,
+  saveUninitialized: true,
   cookie: {
-    maxAge: 3600
+    maxAge: 36000
   }
 }));
 

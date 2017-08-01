@@ -5,9 +5,6 @@ const passport = require("passport");
 const userCtrl = require("../controllers/users/profile");
 var router = express.Router();
 exports.router = router;
-router.get('/', (req, res, next) => {
-    res.send('respond with a resource');
-});
 // 登入
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
     res.json({
@@ -17,5 +14,8 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
 //注册
 router.post('/signUp', (req, res, next) => {
     userCtrl.signUp(req, res, next);
+});
+router.get('/logout', (req, res) => {
+    userCtrl.logout(req, res);
 });
 //# sourceMappingURL=users.js.map

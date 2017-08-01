@@ -5,6 +5,7 @@ import { User } from '../models';
 const LocalStrategy = passportLocal.Strategy;
 
 passport.serializeUser<any, any>((user, done) => {
+  console.log(user.id)
   done(undefined, user.id);
 });
 

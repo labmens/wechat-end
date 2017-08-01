@@ -1,13 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// import * as User from '../../models/User';
 const User_1 = require("../../models/User");
-function login(req, res, next) {
-    res.Json({
-        message: '登入成功'
-    });
-}
-exports.login = login;
 function signUp(req, res, next) {
     req.assert('password', 'Password must be at least 4 characters long').len({ min: 4 });
     req.assert('confimPassword', "Passwords not match").equals(req.body.password);
@@ -42,7 +35,14 @@ function signUp(req, res, next) {
             });
         });
     });
-    // const errors = req.validationErrors();
 }
 exports.signUp = signUp;
+function logout(req, res) {
+    console.log(req.logout);
+    req.logout();
+    res.json({
+        message: '成功退出'
+    });
+}
+exports.logout = logout;
 //# sourceMappingURL=profile.js.map

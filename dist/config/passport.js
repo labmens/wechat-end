@@ -5,6 +5,7 @@ const passportLocal = require("passport-local");
 const models_1 = require("../models");
 const LocalStrategy = passportLocal.Strategy;
 passport.serializeUser((user, done) => {
+    console.log(user.id);
     done(undefined, user.id);
 });
 passport.deserializeUser((id, done) => {
