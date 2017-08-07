@@ -5,11 +5,11 @@ import { User } from '../models';
 const LocalStrategy = passportLocal.Strategy;
 
 passport.serializeUser<any, any>((user, done) => {
-  console.log(user.id)
   done(undefined, user.id);
 });
 
 passport.deserializeUser((id, done) => {
+  console.log(id)
   User.findById(id, (err, user) => {
     done(err, user);
   });

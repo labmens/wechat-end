@@ -21,6 +21,11 @@ router.get('/logout', (req, res) => {
   userCtrl.logout(req, res);
 });
 
+router.post('/addContacts', (req, res, next) => {
+  userCtrl.addContacts(req, res, next);
+})
+
+// router.post('/addContacts', userCtrl.addContacts)
 export {
   router
 }

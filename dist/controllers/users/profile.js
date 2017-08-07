@@ -30,7 +30,7 @@ function signUp(req, res, next) {
             if (err) {
                 return next(err);
             }
-            res.Json({
+            res.json({
                 message: '注册成功'
             });
         });
@@ -45,4 +45,49 @@ function logout(req, res) {
     });
 }
 exports.logout = logout;
+/**
+ * 添加好友
+ * @params username
+ *
+ * 从cookie当中获取到sessionId 然后获取到用户信息, 查看是否已经是好友了
+ * 如果不是好友就继续操作
+ * @return
+ */
+function addContacts(req, res, next) {
+    const _username = req.body.username;
+    const _id = req.user.id;
+    if (!_username) {
+        let err = new Error('请输入联系人用户名!');
+        res.json(err);
+    }
+    User_1.default.findOne({
+        _id
+    }, (err, user) => {
+        if (err) {
+            return next(err);
+        }
+        User_1.default.findOne({
+            username: _username
+        }, '_id', (err, person) => {
+            if (err) {
+                return next(err);
+            }
+            if (!person) {
+                return res.json({
+                    message: '该用户不存在'
+                });
+            }
+            user.friends.push(person._id);
+            user.save(err => {
+                if (err) {
+                    return next(err);
+                }
+                return res.json({
+                    message: '添加成功'
+                });
+            });
+        });
+    });
+}
+exports.addContacts = addContacts;
 //# sourceMappingURL=profile.js.map

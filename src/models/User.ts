@@ -4,6 +4,11 @@ import * as bcrypt from 'bcrypt-nodejs';
 // export type UserModel = mongoose.Document & {
 
 // }
+/**
+ * 创建用户表, 保存好友的id, => 这个需要考虑下 到底是通过外键关联 还是直接存一个数组
+ * 然后还有用户发送的信息, 这个还得重新考虑下 用户和发的信息是一对多  信息与发送的对象应该是一对多(考虑到群组)
+ * 就是要解决这两个问题
+ */
 
 const userSchema = new mongoose.Schema({
   email: String,
@@ -19,7 +24,11 @@ const userSchema = new mongoose.Schema({
     sex: String,
     age: Number,
     picture: String
-  }
+  },
+  friends: [{
+    type: 'ObjectId',
+    ref: 'User'
+  }]
 }, {timestamps: true})
 
 userSchema.methods.comparePassword = function(candidatePassword: string, cb: (err: any, isMatch: boolean) => {}) {

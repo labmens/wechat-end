@@ -18,4 +18,7 @@ router.post('/signUp', (req, res, next) => {
 router.get('/logout', (req, res) => {
     userCtrl.logout(req, res);
 });
+router.post('/addContacts', (req, res, next) => {
+    userCtrl.addContacts(req, res, next);
+});
 //# sourceMappingURL=users.js.map
