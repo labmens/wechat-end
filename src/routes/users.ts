@@ -25,6 +25,10 @@ router.post('/addContacts', (req, res, next) => {
   userCtrl.addContacts(req, res, next);
 })
 
+router.get('/contacts', (req, res, next) => {
+  userCtrl.getContacts(req, res, next);
+})
+
 // router.post('/addContacts', userCtrl.addContacts)
 export {
   router

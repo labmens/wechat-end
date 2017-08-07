@@ -96,3 +96,23 @@ export function logout(req, res) {
   
   })
  }
+
+ /**
+  * 获取所有的好友
+  * 
+  */
+
+  export function getContacts(req, res, next) {
+    const _id = req.user.id
+    User.findOne({
+      _id
+    }).populate('friends', '-friends').exec((err, person) => {
+      if (err) {
+        res.status(500)
+        return res.json({
+          error: err
+        })
+      }
+      return res.json(person.friends)
+    })
+  }

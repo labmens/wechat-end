@@ -90,4 +90,23 @@ function addContacts(req, res, next) {
     });
 }
 exports.addContacts = addContacts;
+/**
+ * 获取所有的好友
+ *
+ */
+function getContacts(req, res, next) {
+    const _id = req.user.id;
+    User_1.default.findOne({
+        _id
+    }).populate('friends', '-friends').exec((err, person) => {
+        if (err) {
+            res.status(500);
+            return res.json({
+                error: err
+            });
+        }
+        return res.json(person.friends);
+    });
+}
+exports.getContacts = getContacts;
 //# sourceMappingURL=profile.js.map
