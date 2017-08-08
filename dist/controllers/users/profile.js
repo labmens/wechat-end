@@ -46,7 +46,6 @@ function signUp(req, res, next) {
 }
 exports.signUp = signUp;
 function logout(req, res) {
-    console.log(req.logout);
     req.logout();
     res.json({
         message: '成功退出'
