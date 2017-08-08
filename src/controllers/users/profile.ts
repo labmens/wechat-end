@@ -2,6 +2,14 @@ import { Request, Response, NextFunction } from "express";
 
 import { default as User } from '../../models/User';
 
+/**
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ * 
+ * 注册
+ */
 export function signUp(req, res, next) {
   req.assert('password', 'Password must be at least 4 characters long').len({min: 4});
   req.assert('confimPassword', "Passwords not match").equals(req.body.password);
@@ -106,7 +114,10 @@ export function logout(req, res) {
     const _id = req.user.id
     User.findOne({
       _id
-    }).populate('friends', '-friends').exec((err, person) => {
+    }).populate({
+      path: 'friends',
+      select: '-password -friends'
+    }).exec((err, person) => {
       if (err) {
         res.status(500)
         return res.json({
