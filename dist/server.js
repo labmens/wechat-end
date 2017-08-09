@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const session = require("express-session");
 const expressValidator = require("express-validator");
+const http = require("http");
+const Socket = require("socket.io");
 const passport = require("passport");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -11,6 +13,11 @@ require("./models");
 require("./config/passport");
 const users_1 = require("./routes/users");
 const app = express();
+const server = new http.Server(app);
+const io = new Socket(server);
+io.on('connection', function (socket) {
+    // socket.emit
+});
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

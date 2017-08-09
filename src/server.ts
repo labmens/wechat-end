@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as session from 'express-session';
 import * as expressValidator from 'express-validator';
+import * as http from 'http';
+import * as Socket from 'socket.io';
 
 import * as passport from 'passport';
 import * as path from 'path';
@@ -14,6 +16,16 @@ import './config/passport';
 import { router as users } from './routes/users'
 
 const app = express();
+
+const server = new http.Server(app);
+const io = new Socket(server);
+
+
+io.on('connection', function(socket) {
+  socket.emit('news', function(value) {
+    console.log(value)
+  })
+})
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
