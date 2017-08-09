@@ -22,8 +22,8 @@ const io = new Socket(server);
 
 
 io.on('connection', function(socket) {
-  socket.emit('news', function(news) {
-    console.log(news)
+  socket.emit('news', function(value) {
+    console.log(value)
   })
 })
 
